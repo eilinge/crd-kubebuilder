@@ -1,0 +1,11 @@
+apiVersion: seven.seven.com/v1
+kind: VirtulMachine
+metadata:
+  name: virtulmachine-seven
+spec:
+  # Add fields here
+#   foo: bar
+  cpu: "2"
+  memory: 400Mi
+status:
+  status: running

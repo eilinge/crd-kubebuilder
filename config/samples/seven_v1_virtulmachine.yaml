@@ -5,3 +5,5 @@ metadata:
 spec:
   # Add fields here
   foo: bar
+  cpu: "1"
+  memory: 200Mi

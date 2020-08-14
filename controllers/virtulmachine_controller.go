@@ -21,6 +21,7 @@ import (
 
 	"github.com/go-logr/logr"
 	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/klog"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -38,11 +39,29 @@ type VirtulMachineReconciler struct {
 // +kubebuilder:rbac:groups=seven.seven.com,resources=virtulmachines/status,verbs=get;update;patch
 
 func (r *VirtulMachineReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
-	_ = context.Background()
+	ctx := context.Background()
 	_ = r.Log.WithValues("virtulmachine", req.NamespacedName)
 
 	// your logic here
+	vm := &sevenv1.VirtulMachine{}
+	if err := r.Get(ctx, req.NamespacedName, vm); err != nil {
+		klog.Error(err, "unable to fetch vm")
+	} else {
+		// klog.Infoln("========", vm.Spec.Cpu, vm.Status.Status)
+		if vm.Status.Status == "Running" {
+			klog.Infoln(vm.Spec.Cpu, vm.Spec.Memory)
+		}
 
+		// if err := r.Delete(ctx, vm); err != nil {
+		// 	klog.Error(err, "unable to delete vm")
+		// }
+
+		vm.Status.Status = "Running"
+		if err := r.Status().Update(ctx, vm); err != nil {
+			klog.Error(err, "unable to update vm status")
+		}
+
+	}
 	return ctrl.Result{}, nil
 }
 

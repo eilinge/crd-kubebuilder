@@ -1,0 +1,17 @@
+apiVersion: seven.seven.com/v1
+kind: VirtulMachine
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"seven.seven.com/v1","kind":"VirtulMachine","metadata":{"annotations":{},"name":"virtulmachine-sample","namespace":"default"},"spec":{"cpu":"1","foo":"bar","memory":"200Mi"}}
+  creationTimestamp: "2020-08-14T02:20:47Z"
+  generation: 1
+  name: virtulmachine-sample
+  namespace: default
+  resourceVersion: "1843695"
+  selfLink: /apis/seven.seven.com/v1/namespaces/default/virtulmachines/virtulmachine-sample
+  uid: e63fc5e6-e136-4e0e-98f8-bd87e9cad268
+spec:
+  cpu: "1"
+  foo: bar
+  memory: 200Mi
