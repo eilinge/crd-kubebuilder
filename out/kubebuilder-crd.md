@@ -8,6 +8,27 @@ Kubebuilder 是一个使用 CRDs 构建 K8s API 的 SDK，主要是：
 - 提供代码库封装底层的 K8s go-client；
 - 方便用户从零开始开发 CRDs，Controllers 和 Admission Webhooks 来扩展 K8s。
 
+## 重要概念
+
+kustomization：kustomization.yaml文件，一个含有kustomization.yaml的目录可以运行 kustomize build。kustomization.yaml的一个例子如下
+
+```
+bases:
+-  /config/myapp1/base
+-  /config/myapp2/base
+resources:
+- service.yaml
+- deployment.yaml
+patches:
+- patch.yaml
+namePrefix: my-
+```
+
+- base：含有一个kustomization.yaml文件的目录，可以被其他的kustomization.yaml来引用
+- resource：文件路径，指向一个声明了kubernetes API对象的YAML文件
+- patch: 文件路径，指向一个声明了kubernetes API patch的YAML文件
+- variant: 含有同一组bases的不同kustomization
+
 ## 核心概念
 
 **GVKs&GVRs**
