@@ -550,7 +550,7 @@ Controller 的初始化是启动 goroutine 不断地查询队列，如果有变�
 
 ### logic
 
-
+![resource](./image/kubebuilder.png)
 
 ## Summary
 
